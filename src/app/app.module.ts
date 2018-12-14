@@ -15,6 +15,7 @@ import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
 
 // Recipes
 import { RecipesPage } from './../pages/recipes/recipes';
+import { RecipePage } from './../pages/recipe/recipe';
 import { NewRecipePage } from './../pages/new-recipe/new-recipe';
 
 
@@ -24,7 +25,8 @@ import { NewRecipePage } from './../pages/new-recipe/new-recipe';
     TabsPage,
     ShoppingListPage,
     RecipesPage,
-    NewRecipePage
+    NewRecipePage,
+    RecipePage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { NewRecipePage } from './../pages/new-recipe/new-recipe';
     TabsPage,
     ShoppingListPage,
     RecipesPage,
-    NewRecipePage
+    NewRecipePage,
+    RecipePage
   ],
   providers: [
     StatusBar,
