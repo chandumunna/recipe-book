@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -9,8 +9,52 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NewRecipePage {
 
-  constructor() {
+  constructor(
+    private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController
+  ) {
   }
 
+  onManageIngredient() {
+    this.actionSheetCtrl.create({
+      title: 'What do you want to do?',
+      buttons: [
+        {
+          text: 'Add Ingredient',
+          handler: () => {
+            this.alertCtrl.create({
+              title: 'Add Ingredient',
+              inputs: [
+                {
+                  name: 'name',
+                  placeholder: 'Ingredient Name'
+                }
+              ],
+              buttons: [
+                {
+                  text: 'Cancel',
+                  handler: data => console.log('Canceled')
+                },
+                {
+                  text: 'Add',
+                  handler: data => console.log(data)
+                }
+              ]
+            }).present()
+          }
+        },
+        {
+          text: 'Remove Ingredient',
+          role: 'destructive',
+          handler: () => console.log('Removed')
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => console.log('Canceled')
+        }
+      ]
+    }).present()
+  }
 
 }

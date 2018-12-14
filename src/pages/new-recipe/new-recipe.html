@@ -24,16 +24,16 @@
 
       <ion-item>
         <ion-label stacked>Dificulty</ion-label>
-        <ion-select stacked>
-          <ion-option>Easy</ion-option>
-          <ion-option>Medium</ion-option>
-          <ion-option>Hard</ion-option>
+        <ion-select>
+          <ion-option value="1">Easy</ion-option>
+          <ion-option value="2">Medium</ion-option>
+          <ion-option value="3">Hard</ion-option>
         </ion-select>
       </ion-item>
 
     </ion-list>
 
-    <button ion-button clear block>
+    <button ion-button clear block (click)="onManageIngredient()">
       Manage Ingredient
     </button>
 
