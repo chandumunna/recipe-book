@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar text-center>
+    <ion-title>New Recipe</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form>
+    <ion-list>
+
+      <ion-item>
+        <ion-label stacked>Title</ion-label>
+        <ion-input name="title" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Description</ion-label>
+        <ion-input name="description" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Dificulty</ion-label>
+        <ion-select stacked>
+          <ion-option>Easy</ion-option>
+          <ion-option>Medium</ion-option>
+          <ion-option>Hard</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+
+    <button ion-button clear block>
+      Manage Ingredient
+    </button>
+
+    <button ion-button block>
+      New Recipe
+    </button>
+  </form>
+
+</ion-content>
