@@ -9,22 +9,22 @@
 
 <ion-content padding>
 
-  <form>
+  <form #form="ngForm" (ngSubmit)="onAddRecipe(form)">
     <ion-list>
 
       <ion-item>
         <ion-label stacked>Title</ion-label>
-        <ion-input name="title" type="text"></ion-input>
+        <ion-input name="title" type="text" ngModel></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Description</ion-label>
-        <ion-input name="description" type="text"></ion-input>
+        <ion-input name="description" type="text" ngModel></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Dificulty</ion-label>
-        <ion-select>
+        <ion-select ngModel>
           <ion-option value="1">Easy</ion-option>
           <ion-option value="2">Medium</ion-option>
           <ion-option value="3">Hard</ion-option>
@@ -37,7 +37,7 @@
       Manage Ingredient
     </button>
 
-    <button ion-button block>
+    <button type="submit" ion-button block>
       New Recipe
     </button>
   </form>

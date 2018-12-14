@@ -4,6 +4,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // Pages
 import { NewRecipePage } from './../new-recipe/new-recipe';
 
+// Models
+import { Recipe } from '../../models/recipe';
+
+// Services
+import { RecipeProvider } from '../../providers/recipe/recipe';
+
 @IonicPage()
 @Component({
   selector: 'page-recipes',
@@ -11,9 +17,18 @@ import { NewRecipePage } from './../new-recipe/new-recipe';
 })
 export class RecipesPage {
 
-  newRecipe: any = NewRecipePage
+  newRecipe: any = NewRecipePage;
 
-  constructor() {
+  recipes: Recipe[] = [];
+
+  constructor(
+    private recipeService: RecipeProvider
+  ) {
   }
+
+  ionViewWillEnter(){
+    this.recipes = this.recipeService.getAll();
+  }
+
 
 }

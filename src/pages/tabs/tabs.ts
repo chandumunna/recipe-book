@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 // Pages
 import { RecipesPage } from './../recipes/recipes';
@@ -16,7 +16,5 @@ export class TabsPage {
   shoppingListPage = ShoppingListPage
   recipesPage= RecipesPage
 
-
-  constructor(public navCtrl: NavController) {}
 
 }

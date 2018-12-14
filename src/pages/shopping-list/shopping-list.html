@@ -9,24 +9,49 @@
 
 <ion-content padding>
 
-  <form>
+  <form #f="ngForm" (ngSubmit)="onAddItem(f)">
     <ion-item>
 
-      <ion-label>Name:</ion-label>
-      <ion-input name="name" type="text" placeholder="Milk"></ion-input>
+      <ion-label fixed>Name</ion-label>
+      <ion-input
+                name="name"
+                type="text"
+                placeholder="Milk"
+                ngModel
+                required></ion-input>
 
     </ion-item>
     <ion-item>
 
-        <ion-label>Amount:</ion-label>
-        <ion-input name="amount" type="number" placeholder="2"></ion-input>
+        <ion-label fixed>Amount</ion-label>
+        <ion-input
+                name="amount"
+                type="number"
+                placeholder="2"
+                ngModel
+                required></ion-input>
 
     </ion-item>
 
-    <button ion-button block>
+    <button ion-button
+            block
+            type="submit"
+            [disabled]="!f.valid">
       Add
     </button>
 
   </form>
+
+  <ion-list *ngIf="ingredients.length > 0">
+
+    <ion-item *ngFor="let item of ingredients; let i = index">
+      <h3>{{ item.name }} ({{ item.amount }})</h3>
+
+      <button ion-button icon-only item-end clear (click)="removeItem(i)">
+        <ion-icon name="close-circle" color="danger"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>

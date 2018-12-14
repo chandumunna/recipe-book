@@ -1,5 +1,6 @@
+import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { IonicPage, ActionSheetController, AlertController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -55,6 +56,10 @@ export class NewRecipePage {
         }
       ]
     }).present()
+  }
+
+  onAddRecipe(recipe: NgForm) {
+    console.log(recipe.value)
   }
 
 }
