@@ -13,4 +13,8 @@ export class RecipeProvider {
     return this.recipes.slice();
   }
 
+  addItem(recipe: Recipe){
+    this.recipes.push(recipe);
+  }
+
 }

@@ -17,12 +17,13 @@ import { RecipeProvider } from '../../providers/recipe/recipe';
 })
 export class RecipesPage {
 
-  newRecipe: any = NewRecipePage;
+  newRecipePage: any = NewRecipePage;
 
   recipes: Recipe[] = [];
 
   constructor(
-    private recipeService: RecipeProvider
+    private recipeService: RecipeProvider,
+    private navCtrl: NavController
   ) {
   }
 
@@ -30,5 +31,8 @@ export class RecipesPage {
     this.recipes = this.recipeService.getAll();
   }
 
+  onAddRecipe(){
+    this.navCtrl.push(this.newRecipePage,{mode: 'New'});
+  }
 
 }

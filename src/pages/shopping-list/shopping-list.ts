@@ -7,7 +7,6 @@ import { ShoppingListProvider } from './../../providers/shopping-list/shopping-l
 
 // Interfaces
 import { Ingredient } from './../../models/ingredient';
-import { ThrowStmt } from '@angular/compiler';
 
 
 @IonicPage()

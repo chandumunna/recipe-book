@@ -1,6 +1,10 @@
-import { NgForm } from '@angular/forms';
-import { Component } from '@angular/core';
-import { IonicPage, ActionSheetController, AlertController } from 'ionic-angular';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, ActionSheetController, AlertController, NavParams } from 'ionic-angular';
+
+// Services
+import { RecipeProvider } from './../../providers/recipe/recipe';
+import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 
 
 @IonicPage()
@@ -8,12 +12,26 @@ import { IonicPage, ActionSheetController, AlertController } from 'ionic-angular
   selector: 'page-new-recipe',
   templateUrl: 'new-recipe.html',
 })
-export class NewRecipePage {
+export class NewRecipePage implements OnInit {
+
+  mode = 'New';
+  recipeForm: FormGroup;
 
   constructor(
     private actionSheetCtrl: ActionSheetController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private recipeService: RecipeProvider,
+    private navParams: NavParams
   ) {
+  }
+
+  ngOnInit() {
+    this.mode = this.navParams.get('mode');
+    this.initializeForm();
+  }
+
+  onSubmit(){
+
   }
 
   onManageIngredient() {
@@ -58,8 +76,12 @@ export class NewRecipePage {
     }).present()
   }
 
-  onAddRecipe(recipe: NgForm) {
-    console.log(recipe.value)
+  private initializeForm(){
+    this.recipeForm = new FormGroup({
+      'title': new FormControl(null, Validators.required),
+      'description': new FormControl(null, Validators.required),
+      'difficulty': new FormControl('Medium', Validators.required)
+    });
   }
 
 }
