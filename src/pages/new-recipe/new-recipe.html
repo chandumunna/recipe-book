@@ -33,11 +33,26 @@
 
     </ion-list>
 
-    <button type="button" ion-button clear block (click)="onManageIngredient()">
+    <button type="button"
+            ion-button
+            outline
+            block
+            (click)="onManageIngredient()">
       Manage Ingredient
     </button>
 
-    <button type="submit" ion-button block navPop>
+    <ion-list formArrayName="ingredients" *ngIf="recipeForm.get('ingredients').length > 0">
+      <ion-item
+        *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index">
+        <ion-label floating>Name: </ion-label>
+        <ion-input type="text" [formControlName]="i"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button type="submit"
+            ion-button
+            block
+            [disabled]="!recipeForm.valid">
       {{ mode }} Recipe
     </button>
   </form>

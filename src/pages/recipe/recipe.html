@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar text-center>
-    <ion-title>Recipe</ion-title>
+    <ion-title>{{ recipe.title | uppercase }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,27 +11,44 @@
 
   <ion-row>
     <ion-col text-center>
-      <h1>Spaghetti</h1>
+      <h2>{{ recipe.title }}</h2>
+      <div class="subtitle">{{ recipe.difficulty }}</div>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col text-center>
-      <p>Easy</p>
+      <p>{{ recipe.description }}</p>
     </ion-col>
   </ion-row>
 
   <ion-list>
-    <ion-item>
-      Spaghetti
+    <ion-item *ngFor="let ingredient of recipe.ingredients">
+      {{ ingredient.name }} ({{ ingredient.amount }})
     </ion-item>
   </ion-list>
 
-  <button ion-button block clear>
+  <button ion-button block clear (click)="addIngredientsToShoppingList()">
     Add Ingredients to Shopping List
   </button>
 
-  <button ion-button block outline>
-    Edit Recipe
-  </button>
+  <ion-row>
+    <ion-col>
+      <button ion-button
+              block
+              outline
+              (click)="updateRecipe()">
+        Edit Recipe
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button
+              block
+              outline
+              color="danger"
+              (click)="removeRecipe()">
+        Remove Recipe
+      </button>
+    </ion-col>
+  </ion-row>
 
 </ion-content>

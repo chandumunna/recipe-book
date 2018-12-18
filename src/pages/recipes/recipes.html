@@ -17,11 +17,16 @@
 
 <ion-content padding>
 
-  <ion-list *ngIf="recipes.length > 0">
+  <ion-list *ngIf="recipes?.length > 0">
 
-    <ion-item *ngFor="let recipe of recipes">
-      Itme
-    </ion-item>
+    <button ion-item
+            *ngFor="let recipe of recipes; let i = index"
+            (click)="onRecipeDetails(recipe, i)">
+      <h2>{{ recipe.title }}</h2>
+      <ion-note>
+        {{ recipe.difficulty }}
+      </ion-note>
+    </button>
 
   </ion-list>
 

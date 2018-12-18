@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, AlertController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 // Services
@@ -19,8 +19,7 @@ export class ShoppingListPage {
   ingredients: Ingredient[] = [];
 
   constructor(
-    private slService: ShoppingListProvider,
-    private alertCtrl: AlertController
+    private slService: ShoppingListProvider
     ){}
 
   ionViewWillEnter(){

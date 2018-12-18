@@ -13,8 +13,17 @@ export class RecipeProvider {
     return this.recipes.slice();
   }
 
-  addItem(recipe: Recipe){
+  addRecipe(recipe: Recipe){
     this.recipes.push(recipe);
+  }
+
+  updateRecipe(index: number, recipe: Recipe){
+    this.recipes[index] = recipe;
+    console.log(this.recipes);
+  }
+
+  removeRecipe(index: number) {
+    this.recipes.slice(index, 1);
   }
 
 }
