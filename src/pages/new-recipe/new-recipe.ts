@@ -50,9 +50,11 @@ export class NewRecipePage implements OnInit {
     }
     // Adiciona um objeto para cada ingrediente dentro do array ingredients,e
     // armazena na propriedade ingredients do objeto value
-    value.ingredients = value.ingredients.map(name => {
-      return { name: name, amount: 1 };
+    value.ingredients = value.ingredients.map((name, amount) => {
+      return { name: name, amount: amount === 0 ? 1 : amount };
     });
+
+    console.log(value.ingredients)
 
     if (this.mode == 'Edit') {
       this.recipeService.updateRecipe(this.index, value);
@@ -111,6 +113,11 @@ export class NewRecipePage implements OnInit {
         {
           name: 'name',
           placeholder: 'Ingredient Name'
+        },
+        {
+          name: 'amount',
+          placeholder: 'Quantity of ingredient',
+          type: 'number'
         }
       ],
       buttons: [
@@ -128,8 +135,14 @@ export class NewRecipePage implements OnInit {
               this.showMessage('Please, insert a valid name');
               return;
             }
+
+            if(data.amount == 0 || data.amount == null) {
+              data.amount = 1;
+            }
+
             (<FormArray>this.recipeForm.get('ingredients'))
               .push(new FormControl(data.name, Validators.required));
+
             this.showMessage(`${data.name} added successfuly`);
           }
         }

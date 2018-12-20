@@ -20,7 +20,7 @@ import { NewRecipePage } from './../new-recipe/new-recipe';
 export class RecipePage implements OnInit {
 
   newRecipePage = NewRecipePage;
-  
+
   recipe: Recipe;
   index: number;
 
@@ -67,6 +67,7 @@ export class RecipePage implements OnInit {
           handler: () => {
             this.recipeService.removeRecipe(this.index);
             this.showToast('Recipe Deleted');
+            this.navCtrl.popToRoot();
           }
         },
         {
