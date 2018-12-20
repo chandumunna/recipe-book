@@ -20,6 +20,10 @@ import { NewRecipePage } from './../pages/new-recipe/new-recipe';
 import { ShoppingListProvider } from '../providers/shopping-list/shopping-list';
 import { RecipeProvider } from '../providers/recipe/recipe';
 
+// Signin/Signup
+import { SignupPage } from './../pages/signup/signup';
+import { SigninPage } from './../pages/signin/signin';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     ShoppingListPage,
     RecipesPage,
     NewRecipePage,
-    RecipePage
+    RecipePage,
+    SigninPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     ShoppingListPage,
     RecipesPage,
     NewRecipePage,
-    RecipePage
+    RecipePage,
+    SigninPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
