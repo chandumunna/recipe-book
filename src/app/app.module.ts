@@ -17,12 +17,15 @@ import { ShoppingListPage } from './../pages/shopping-list/shopping-list';
 import { RecipesPage } from './../pages/recipes/recipes';
 import { RecipePage } from './../pages/recipe/recipe';
 import { NewRecipePage } from './../pages/new-recipe/new-recipe';
-import { ShoppingListProvider } from '../providers/shopping-list/shopping-list';
-import { RecipeProvider } from '../providers/recipe/recipe';
 
 // Signin/Signup
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
+
+/* SERVICES */
+import { AuthService } from './../providers/auth/auth';
+import { ShoppingListProvider } from '../providers/shopping-list/shopping-list';
+import { RecipeProvider } from '../providers/recipe/recipe';
 
 
 @NgModule({
@@ -56,7 +59,8 @@ import { SigninPage } from './../pages/signin/signin';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ShoppingListProvider,
-    RecipeProvider
+    RecipeProvider,
+    AuthService
   ]
 })
 export class AppModule {}
