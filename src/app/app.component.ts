@@ -6,6 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // Firebase
 import FireBase from 'firebase';
 
+// Services
+import { AuthService } from './../providers/auth/auth';
+
 // RootPages
 import { TabsPage } from './../pages/tabs/tabs';
 import { SigninPage } from './../pages/signin/signin';
@@ -17,9 +20,10 @@ import { SignupPage } from './../pages/signup/signup';
 })
 export class MyApp {
 
-  tabsPage: any = TabsPage;
+  rootPage: any = TabsPage;
   signinPage: any = SigninPage;
   signupPage: any = SignupPage;
+  isLoged: boolean = false;
 
   @ViewChild('main') navCtrl: NavController;
 
@@ -27,12 +31,24 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private authService: AuthService
   ) {
     // Initialize FireBase
     FireBase.initializeApp({
       apiKey: "AIzaSyCt7FbWKNx51CyYKYvXd10MNdJJZ0k70XE",
       authDomain: "ionic3-recipebook-fd83f.firebaseapp.com"
+    });
+
+    FireBase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.isLoged = true;
+        this.rootPage = TabsPage;
+      }
+      else {
+        this.isLoged = false;
+        this.rootPage = SigninPage;
+      }
     });
 
     platform.ready().then(() => {
@@ -49,7 +65,9 @@ export class MyApp {
   }
 
   onLogout() {
-
+    this.authService.singout();
+    this.menuCtrl.close();
+    this.navCtrl.setRoot(SigninPage);
   }
 }
 

@@ -1,10 +1,13 @@
+import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
+
 
 // Tabs
 import { TabsPage } from './../pages/tabs/tabs';
@@ -37,11 +40,13 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     NewRecipePage,
     RecipePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    SLOptionsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,7 +57,8 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     NewRecipePage,
     RecipePage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    SLOptionsPage
   ],
   providers: [
     StatusBar,
