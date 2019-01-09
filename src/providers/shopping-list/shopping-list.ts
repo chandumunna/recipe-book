@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { map } from 'rxjs/operators';
+
 // Services
 import { AuthService } from './../auth/auth';
 
@@ -17,7 +19,7 @@ export class ShoppingListProvider {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-    ) {}
+  ) { }
 
   getAll() {
     return this.ingredients.slice();
@@ -43,6 +45,22 @@ export class ShoppingListProvider {
         + userId
         + '/shopping-list.json?auth='
         + token, this.ingredients);
+  }
+
+  fetchList(token: string) {
+    const userId = this.authService.getCurrentUser().uid;
+
+    return this.http
+      .get<Ingredient[]>(this.dbAddress
+        + userId
+        + '/shopping-list.json?auth='
+        + token)
+      .pipe(
+        map(data => {
+          this.ingredients = data;
+          return data;
+        })
+      );
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, PopoverController } from 'ionic-angular';
+import { IonicPage, PopoverController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 
 // PopOver
@@ -25,10 +25,13 @@ export class ShoppingListPage {
   constructor(
     private slService: ShoppingListProvider,
     private popoverCtrl: PopoverController,
-    private auhtService: AuthService
-    ){}
+    private auhtService: AuthService,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController
+  ) { }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.loadIngredients();
   }
 
@@ -38,7 +41,7 @@ export class ShoppingListPage {
     this.loadIngredients();
   }
 
-  removeItem(index: number){
+  removeItem(index: number) {
     this.slService.remove(index);
     this.loadIngredients();
   }
@@ -46,25 +49,78 @@ export class ShoppingListPage {
   onShowOptions(event: MouseEvent) {
     const popOver = this.popoverCtrl.create(SLOptionsPage);
 
-    popOver.present({ev: event});
+    popOver.present({ ev: event });
     popOver.onDidDismiss(data => {
-      if (data.action == 'store') {
-        this.auhtService.getCurrentUser().getIdToken()
-          .then(
-            (token: string) => {
-              this.slService.storeList(token)
-                .subscribe(() => console.log('Success!'), err => console.log(err));
-            }
-          )
-          .catch();
+
+      if (data) {
+        switch (data.action) {
+
+          case 'store': {
+            const loading = this.loadingCtrl.create({
+              content: 'Storing List...'
+            });
+            loading.present();
+
+            this.auhtService.getCurrentUser().getIdToken()
+              .then(
+                (token: string) => {
+                  this.slService.storeList(token)
+                    .subscribe(() => {
+                      loading.dismiss();
+                      this.toastCtrl.create({
+                        message: 'List stored Successfuly',
+                        duration: 3000
+                      }).present();
+                    },
+                      err => {
+                        loading.dismiss();
+                        this.errorHandler(err.error.error);
+                      }
+                    );
+                }
+              );
+            break;
+          }
+          case 'load': {
+            const loading = this.loadingCtrl.create({
+              content: 'Loading List...'
+            });
+
+            this.auhtService.getCurrentUser().getIdToken()
+              .then((token: string) => {
+                this.slService.fetchList(token)
+                  .subscribe((list: Ingredient[]) => {
+                    if (list) {
+                      this.ingredients = list;
+                      this.loadIngredients();
+                      loading.dismiss();
+                    }
+                  }, err => {
+                    loading.dismiss();
+                    this.errorHandler(err.error.error);
+                  })
+              });
+            break;
+          }
+
+        }
       }
       else {
-
+        console.log('Dismissed');
       }
+
     });
   }
 
-  private loadIngredients(){
+  private errorHandler(ErrorMessage: string) {
+    this.alertCtrl.create({
+      message: ErrorMessage,
+      title: 'An Error Ocurred!',
+      buttons: ['OK']
+    }).present();
+  }
+
+  private loadIngredients() {
     this.ingredients = this.slService.getAll();
   }
 }
