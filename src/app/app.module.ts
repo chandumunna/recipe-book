@@ -1,4 +1,3 @@
-import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -25,6 +24,9 @@ import { NewRecipePage } from './../pages/new-recipe/new-recipe';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';
 
+// Database Options (Load and Store Popover)
+import { DatabaseOptionsPage } from './../pages/database-options/database-options';
+
 /* SERVICES */
 import { AuthService } from './../providers/auth/auth';
 import { ShoppingListProvider } from '../providers/shopping-list/shopping-list';
@@ -41,7 +43,7 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     RecipePage,
     SigninPage,
     SignupPage,
-    SLOptionsPage
+    DatabaseOptionsPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,7 @@ import { RecipeProvider } from '../providers/recipe/recipe';
     RecipePage,
     SigninPage,
     SignupPage,
-    SLOptionsPage
+    DatabaseOptionsPage
   ],
   providers: [
     StatusBar,

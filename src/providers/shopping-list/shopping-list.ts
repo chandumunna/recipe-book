@@ -56,9 +56,11 @@ export class ShoppingListProvider {
         + '/shopping-list.json?auth='
         + token)
       .pipe(
-        map(data => {
-          this.ingredients = data;
-          return data;
+        map((ingredients: Ingredient[]) => {
+          if (ingredients) {
+            this.ingredients = ingredients;
+            return ingredients;
+          }
         })
       );
   }

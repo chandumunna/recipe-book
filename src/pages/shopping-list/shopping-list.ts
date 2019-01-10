@@ -3,7 +3,7 @@ import { IonicPage, PopoverController, LoadingController, ToastController, Alert
 import { NgForm } from '@angular/forms';
 
 // PopOver
-import { SLOptionsPage } from './sl-options/sl-options';
+import { DatabaseOptionsPage } from './../database-options/database-options';
 
 // Services
 import { ShoppingListProvider } from './../../providers/shopping-list/shopping-list';
@@ -47,7 +47,7 @@ export class ShoppingListPage {
   }
 
   onShowOptions(event: MouseEvent) {
-    const popOver = this.popoverCtrl.create(SLOptionsPage);
+    const popOver = this.popoverCtrl.create(DatabaseOptionsPage);
 
     popOver.present({ ev: event });
     popOver.onDidDismiss(data => {
